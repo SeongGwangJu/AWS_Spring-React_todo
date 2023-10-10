@@ -13,11 +13,11 @@ function Signup(props) {
         email: "",
         password: ""
     }
+    
     const [ account, setAccount ] = useState(emptyAccount);
     const [ errorMsg, setErrorMsg ] = useState("");
 
     const handleInputChange = (e) => {
-        console.log(account)
         setAccount({
             ...account,
             [e.target.name]: e.target.value
@@ -30,6 +30,7 @@ function Signup(props) {
             email: "aaa@gmail.com",
             name:"주성광"
         })
+        navigate("accounts/login");
     }
     // const handleSignupSubmit = async () => {
     //     try{
