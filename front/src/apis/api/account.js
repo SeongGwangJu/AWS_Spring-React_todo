@@ -1,7 +1,9 @@
+import axios from "axios";
 import instance from "../../utils/instance";
 
 export const signup = async (account) => {
-    const response = await instance.post("/api/v1/auth/user", account);
+    // const response = await axios.post("http://localhost:8080/auth/signup", account);
+    const response = await instance.post("/auth/signup", account)
     console.log(response);
     return response;
 }

@@ -8,7 +8,7 @@ export const SLayout =css`
 
     & > input, button {
         height: 40px;
-        width: 400px;
+        width: 320px;
         font-size: 14px;
         margin: 20px 0px;
     }
