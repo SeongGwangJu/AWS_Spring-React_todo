@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,7 +22,7 @@ public class AuthController {
 
 	@PostMapping("/auth/signup")
 
-	public ResponseEntity<?> signup(@RequestBody SignupReqDto signupReqDto,
+	public ResponseEntity<?> signup(@Valid @RequestBody SignupReqDto signupReqDto,
 	                                //결과는 bindingResult에 담긴다.
 	                                BindingResult bindingResult) {
 
