@@ -24,6 +24,7 @@ function Signin(props) {
 
     return (
         <div css={S.SLayout}>
+            <h2>로그인</h2>
             <input type="text" placeholder="email" name="email" onChange={handleInputChange} />
             <input type="password" placeholder="password" name="password" onChange={handleInputChange} />
             <button onClick={handleSigninSubmit} >로그인</button>

@@ -8,19 +8,22 @@ function Signup(props) {
 
     const navigate = useNavigate();
 
-    const emptyAccount = {
-        name: "",
+    const user = {
         email: "",
+        name: "",
         password: ""
     }
 
-    const [ account, setAccount ] = useState(emptyAccount);
+    const [ account, setAccount ] = useState(user);
     const [ errorMsg, setErrorMsg ] = useState("");
 
     const handleInputChange = (e) => {
+        const { name, value } = e.target;
+
         setAccount({
             ...account,
-            [e.target.name]: e.target.value
+            [name]: value
+            // [e.target.name]: e.target.value //비구조화 대신 한줄로 표현 가능
         });
     }
 
@@ -39,16 +42,21 @@ function Signup(props) {
             navigate("/accounts/login");
 
         }catch(error) {
-			const responseErrorMsg = error.response.data
-			const keys = Object.keys(responseErrorMsg);
+            console.log("signup 중 Error 발생")
+            console.log(error);
 
-            if(keys.includes("name")) {
-				setErrorMsg(responseErrorMsg.username);
-			}else if(keys.includes("email")) {
-				setErrorMsg(responseErrorMsg.phoneOrEmail);
-			}else if(keys.includes("password")) {
-				setErrorMsg(responseErrorMsg.password);
-			}
+			const responseErrors = error.response.data
+			const keyList = Object.keys(responseErrors);
+
+            if(keyList.includes("email")) {
+                alert(responseErrors.email);
+            }else if(keyList.includes("password")){
+                alert(responseErrors.password);
+            }else if(keyList.includes("name")){
+                alert(responseErrors.name);
+            }else {
+                alert("회원가입 실패")
+            }
         }
     }
 
@@ -57,6 +65,7 @@ function Signup(props) {
             <div>
                 {errorMsg}
             </div>
+            <h2>회원가입</h2>
             <input type="text" placeholder="email" name="email" onChange={handleInputChange} />
             <input type="text" placeholder="name" name="name" onChange={handleInputChange} />
             <input type="password" placeholder="password" name="password" onChange={handleInputChange} />
