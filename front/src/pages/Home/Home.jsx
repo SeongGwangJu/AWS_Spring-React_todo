@@ -1,21 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+/** @jsxImportSource @emotion/react */
+import * as S from './Style'
 
 function Home(props) {
     return (
-        <div>
-            <h1>
-                Hello
+        <>
+            <h1 css={S.Sh1}>
+                TODO
             </h1>
             
-            <Link to="/accounts/signup">
-                회원가입
-			</Link>
+            <ul>
+                <li>
+                    1
+                </li>
+            </ul>
+            <h4>
+                <Link to="/accounts/signup">
+                    회원가입 창으로 이동
+                </Link>
+            </h4>
 
-            <Link to="/accounts/login">
-                로그인으로 이동
-			</Link>
-        </div>
+            <h4>
+                <Link to="/accounts/login">
+                    로그인 창으로 이동
+                </Link>
+            </h4>
+        </>
     );
 }
 

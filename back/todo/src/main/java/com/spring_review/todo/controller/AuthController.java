@@ -28,6 +28,7 @@ public class AuthController {
 	@PostMapping("/auth/signup")
 	// @Valid-> 유효성 검사를 함. 결과는 bindingResult에 담긴다. 이 2개는 세트.
 	public ResponseEntity<?> signup(@Valid @RequestBody SignupReqDto signupReqDto, BindingResult bindingResult) throws Exception {
+
 		//결과에 에러가 있다면->True
 		if(bindingResult.hasErrors()) {
 			Map<String, String> errorMap = new HashMap<>();
@@ -57,7 +58,8 @@ public class AuthController {
 	}
 
 	@PostMapping("/auth/signin")
-	public ResponseEntity<?> signin(SigninReqDto signinReqDto) {
+	public ResponseEntity<?> signin(@RequestBody SigninReqDto signinReqDto) {
+		authService.signin(signinReqDto);
 		return ResponseEntity.ok().body("Success");
 	}
 }

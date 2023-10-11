@@ -16,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+	private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 	//암호화 객체 생성 + IoC에 passwordEncoder라는 이름으로, Bean 등록.
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -32,6 +33,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll()
 				.and()
 				.exceptionHandling() //AuthService 에서 authentication중 흐름이 끊김. 예외 처리 해줘야함.
-				.authenticationEntryPoint(CustomAuthenticationEntryPoint); //매개변수를 보면 authenticationEntryPoint를 넣어줘야함.
+				.authenticationEntryPoint(customAuthenticationEntryPoint); //매개변수를 보면 authenticationEntryPoint를 넣어줘야함.
 	}
 }

@@ -21,14 +21,15 @@ public class AuthService {
 //방법(1) null이 아니면 true(중복O), null이면 false(중복x)
 //		result = userMapper.findUserByEmail(email) != null;
 
-//방법(2) userCount가 0보다 크면
+//방법(2) userCount가 0보다 크면 중복임.
 		result = userMapper.getUserCountByEmail(email) > 0;
-		System.out.println("duplicate Check Result : " + result + "true = 중복. false= 중복 x => 가입 성공");
+		System.out.println("duplicate Check Result : " + result + " *true = 중복. false= 중복 x => 가입 성공");
 		return result;
 	}
 
 	public String signin(SigninReqDto signinReqDto) {
-		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(signinReqDto.getEmail(), signinReqDto.getPassword());
+		UsernamePasswordAuthenticationToken token =
+				new UsernamePasswordAuthenticationToken(signinReqDto.getEmail(), signinReqDto.getPassword());
 
 		//return type : authentication
 		Authentication authentication = authenticationManagerBuilder.getObject().authenticate(token);

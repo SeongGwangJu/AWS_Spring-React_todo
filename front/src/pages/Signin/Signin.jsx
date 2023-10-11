@@ -1,18 +1,23 @@
 import React, { useState } from 'react';/** @jsxImportSource @emotion/react */
 import * as S from './Style'
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { signin } from '../../apis/api/account';
+import axios from 'axios';
 
 function Signin(props) {
-    const emptyAccount = {
+
+    const navigate = useNavigate();
+
+    const user = {
         name: "",
         email: "",
         password: ""
     }
 
-    const [ account, setAccount ] = useState(emptyAccount);
+    const [ account, setAccount ] = useState(user);
 
     const handleInputChange = (e) => {
+        console.log([e.target.name] + " : " + e.target.value)
         setAccount({
             ...account,
             [e.target.name]: e.target.value
@@ -23,14 +28,20 @@ function Signin(props) {
     const handleSigninSubmit = async () => {
         try {
             await signin(account);
-            Navigate("/")
+            navigate("/")
         }catch(error) {
             console.log("login중 Error 발생")
             console.log(error);
-            const responseErrors = error.response.data
-			const keyList = Object.keys(responseErrors);
         }
     }
+
+    // const handleSigninSubmit = async () => {
+    //     try {
+    //         await axios.post("http://localhost:8080/auth/signin", account);
+    //     }catch(error) {
+    //         console.error(error);
+    //     }
+    // }
 
     return (
         <div css={S.SLayout}>
