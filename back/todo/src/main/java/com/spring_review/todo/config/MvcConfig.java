@@ -15,5 +15,6 @@ public class MvcConfig implements WebMvcConfigurer {
 		registry.addMapping("/**")      //모든 요청 엔드포인트
 				.allowedMethods("*")    //모든 요청 메소드
 				.allowedOrigins("*");   //모든 요청 서버  https://naver.com localhost:3000
+//				.allowedOrigins("http://localhost:3000");
 	}
 }

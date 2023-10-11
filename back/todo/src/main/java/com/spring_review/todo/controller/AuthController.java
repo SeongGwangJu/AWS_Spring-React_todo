@@ -1,6 +1,7 @@
 package com.spring_review.todo.controller;
 
 import com.spring_review.todo.dto.SignupReqDto;
+import com.spring_review.todo.service.AuthService;
 import com.spring_review.todo.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,33 +19,42 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class AuthController {
 
+//	@Autowired
 	private final UserService userService;
+//	@Autowired
+	private final AuthService authService;
 
 	@PostMapping("/auth/signup")
+	// @Valid-> 유효성 검사를 함. 결과는 bindingResult에 담긴다. 이 2개는 세트.
+	public ResponseEntity<?> signup(@Valid @RequestBody SignupReqDto signupReqDto, BindingResult bindingResult) throws Exception {
 
-	public ResponseEntity<?> signup(@Valid @RequestBody SignupReqDto signupReqDto,
-	                                //결과는 bindingResult에 담긴다.
-	                                BindingResult bindingResult) {
-
-		//결과에 에러가 있다면
+		//결과에 에러가 있다면->True
 		if(bindingResult.hasErrors()) {
-			//FieldError객체가 담긴 List를 돌면서
 			Map<String, String> errorMap = new HashMap<>();
+			//FieldError객체가 담긴 List를 돌면서 errorMap에 넣는다.
 			for(FieldError fieldError : bindingResult.getFieldErrors()) {
-				// *get~이면 returnType을 꼭 볼것
+				// *get~이면 return Type을 꼭 확인할 것!
 				String fieldName = fieldError.getField();
 				String message = fieldError.getDefaultMessage();
-				errorMap.put(fieldName,message);
+				errorMap.put(fieldName, message);
 
-//				System.out.println(fieldName);
-//				System.out.println(message);
+				System.out.println(fieldName);
+				System.out.println(message);
 			}
 
 			return ResponseEntity.badRequest().body(errorMap);
-
 		}
+
+		//중복 검사
+		if (authService.isDuplicatedEmail(signupReqDto.getEmail())) {
+			Map<String, String> errorMap = new HashMap<>();
+			errorMap.put("email", "이미 사용중인 이메일입니다.");
+			return ResponseEntity.badRequest().body(errorMap);
+		}
+
 		userService.signupUser(signupReqDto);
-		return ResponseEntity.ok().body("NonError");
+		return ResponseEntity.ok().body("Success");
+
 
 
 	}

@@ -6,5 +6,6 @@ spring:
     password: 1q2w3e4r
 
 mybatis:
+#  mybatis가 참조할 경로.
   mapper-locations:
     - /mappers/*.xml

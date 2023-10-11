@@ -2,6 +2,7 @@ package com.spring_review.todo.dto;
 
 import com.spring_review.todo.entity.User;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.validation.constraints.Email;
@@ -10,6 +11,7 @@ import javax.validation.constraints.Pattern;
 
 @Data
 public class SignupReqDto {
+
 
 //	@Pattern(regexp = "^[a-zA-Z0-9]+@[0-9a-zA-Z]+\\.[a-z]*$", message = "이메일을 입력하세요.")
 //	@NotBlank(message = "이메일은 공백일 수 없습니다.")
@@ -26,8 +28,8 @@ public class SignupReqDto {
 
 	public User toUserEntity(BCryptPasswordEncoder passwordEncoder) {
 		return User.builder()
-				.name(name)
 				.email(email)
+				.name(name)
 				.password(passwordEncoder.encode(password))
 				.build();
 	}

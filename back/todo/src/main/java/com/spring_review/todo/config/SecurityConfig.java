@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll();
 	}
 
-	//암호화 객체 생성 + SpringContainer에 Bean으로 등록함.
+	//암호화 객체 생성 + IoC에 passwordEncoder라는 이름으로, Bean 등록.
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
