@@ -1,7 +1,11 @@
 package com.spring_review.todo.service;
 
+import com.spring_review.todo.dto.SigninReqDto;
 import com.spring_review.todo.repository.UserMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -9,6 +13,7 @@ import org.springframework.stereotype.Service;
 public class AuthService {
 
 	private final UserMapper userMapper;
+	private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
 	public Boolean isDuplicatedEmail(String email) {
 		boolean result = false;
@@ -20,5 +25,15 @@ public class AuthService {
 		result = userMapper.getUserCountByEmail(email) > 0;
 		System.out.println("duplicate Check Result : " + result + "true = 중복. false= 중복 x => 가입 성공");
 		return result;
+	}
+
+	public String signin(SigninReqDto signinReqDto) {
+		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(signinReqDto.getEmail(), signinReqDto.getPassword());
+
+		//return type : authentication
+		Authentication authentication = authenticationManagerBuilder.getObject().authenticate(token);
+		System.out.println("여기까지 왔음 !!!");
+		System.out.println(authentication.getName());
+		return  null;
 	}
 }

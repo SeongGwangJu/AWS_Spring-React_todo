@@ -9,7 +9,7 @@ export const signup = async (account) => {
 }
 
 export const signin = async (account) => {
-    const response = await instance.post("/auth/login", account)
+    const response = await instance.post("/auth/signin", account)
     console.log("login 응답")
     console.log(response)
 }

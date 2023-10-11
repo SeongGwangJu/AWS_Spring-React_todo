@@ -1,5 +1,6 @@
 package com.spring_review.todo.controller;
 
+import com.spring_review.todo.dto.SigninReqDto;
 import com.spring_review.todo.dto.SignupReqDto;
 import com.spring_review.todo.service.AuthService;
 import com.spring_review.todo.service.UserService;
@@ -27,7 +28,6 @@ public class AuthController {
 	@PostMapping("/auth/signup")
 	// @Valid-> 유효성 검사를 함. 결과는 bindingResult에 담긴다. 이 2개는 세트.
 	public ResponseEntity<?> signup(@Valid @RequestBody SignupReqDto signupReqDto, BindingResult bindingResult) throws Exception {
-
 		//결과에 에러가 있다면->True
 		if(bindingResult.hasErrors()) {
 			Map<String, String> errorMap = new HashMap<>();
@@ -38,8 +38,8 @@ public class AuthController {
 				String message = fieldError.getDefaultMessage();
 				errorMap.put(fieldName, message);
 
-				System.out.println(fieldName);
-				System.out.println(message);
+				System.out.println(fieldName); //email or name ..
+				System.out.println(message); //"이메일 형식을 지켜주세요" or "공백일 수 없습니다 등.
 			}
 
 			return ResponseEntity.badRequest().body(errorMap);
@@ -54,8 +54,10 @@ public class AuthController {
 
 		userService.signupUser(signupReqDto);
 		return ResponseEntity.ok().body("Success");
+	}
 
-
-
+	@PostMapping("/auth/signin")
+	public ResponseEntity<?> signin(SigninReqDto signinReqDto) {
+		return ResponseEntity.ok().body("Success");
 	}
 }
