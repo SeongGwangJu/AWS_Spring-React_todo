@@ -10,8 +10,7 @@ function App() {
     <>
     <RootLayout>
       <Routes>
-        <Route path='/' element={<Signup />} />
-        {/* <Route path='/' element={<Home />} /> */}
+        <Route path='/' element={<Home />} />
         <Route path='/accounts/signup' element={<Signup />} />
         <Route path='/accounts/login' element={<Signin />} />
       </Routes>

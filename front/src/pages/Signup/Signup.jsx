@@ -48,6 +48,11 @@ function Signup(props) {
 			const responseErrors = error.response.data
 			const keyList = Object.keys(responseErrors);
 
+            console.log("error.response.data")
+            console.log(responseErrors)
+            console.log("keyList")
+            console.log(keyList)
+
             if(keyList.includes("email")) {
                 alert(responseErrors.email);
             }else if(keyList.includes("password")){
