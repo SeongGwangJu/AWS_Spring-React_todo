@@ -9,7 +9,10 @@ function Home(props) {
             <h1 css={S.Sh1}>
                 TODO
             </h1>
-            
+            <div>
+                <input type="text" />
+                <button> 추가 </button>
+            </div>
             <ul>
                 <li>
                     1
