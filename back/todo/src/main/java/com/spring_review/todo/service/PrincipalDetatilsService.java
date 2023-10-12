@@ -28,7 +28,6 @@ public class PrincipalDetatilsService implements UserDetailsService {
 			System.out.println("조회된 user가 없으므로 null을 리턴함."); //id가 틀렸을 경우임.
 			return null;
 		}
-		System.out.println("user가 null은 아니니까 이건 뜨겠지.");
 		return new PrincipalUser(user);
 	}
 }

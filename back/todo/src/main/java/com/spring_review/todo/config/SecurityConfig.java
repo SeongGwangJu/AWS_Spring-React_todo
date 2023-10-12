@@ -32,10 +32,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests() //접근권한 설정
 				.antMatchers("/auth/**") //모든 사용자(로그인 없이도) "/auth/" url접근 허용.
 				.permitAll()
-				.antMatchers("admin/**")
-				.hasRole("admin") //admin 권한이 있는지 확인.
-				.anyRequest()
-				.authenticated()
 				.and()
 				.exceptionHandling() //AuthService 에서 authentication중 흐름이 끊길때의 예외 처리
 				.authenticationEntryPoint(customAuthenticationEntryPoint); //매개변수를 보면 authenticationEntryPoint를 넣어줘야함.

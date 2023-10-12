@@ -50,7 +50,6 @@ public class AuthService {
 
 //	ex.	Date date = new Date("2023-10-13 12:34:00");
 		Date date = new Date(new Date().getTime() + (1000 * 60 * 60 * 24)); // 1000ms(1초) * 60 * 60
-		System.out.println("jwtToken 발급 전");
 		String jwtToken = Jwts.builder()
 				.claim("username", authentication.getName())
 				.claim("auth", authentication.getAuthorities())
@@ -59,8 +58,7 @@ public class AuthService {
 				.compact();
 
 		System.out.println("jwtToken " + jwtToken);
-		System.out.println("authentication.getAuthorities() : " + authentication.getAuthorities());
 
-		return  jwtToken;
+		return  null;
 	}
 }
