@@ -4,12 +4,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+
 //Configuration : ioc Container에 set
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
+
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
+		System.out.println("MvcConfig의 addCorsMappings 가 실행됨.");
 		//cross origin
 		WebMvcConfigurer.super.addCorsMappings(registry);
 		registry.addMapping("/**")      //모든 요청 엔드포인트

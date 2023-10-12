@@ -17,7 +17,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 
 	@Override
 	public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-		System.out.println(authException.getClass());
 		System.out.println("시큐리티의 모든 예외는 여기(CAEP)에서 처리함.");
+		System.out.println("EntryPoint의 commence 안의 예외.class : " +authException.getClass());
 	}
 }

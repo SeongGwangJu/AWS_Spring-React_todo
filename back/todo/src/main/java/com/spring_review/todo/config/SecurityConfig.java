@@ -26,13 +26,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	//http 보안구성 정의.
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		System.out.println("SecurityConfig 실행");
 		http.cors(); //cors 활성화
 		http.csrf().disable();  //CSRF(Cross-Site Request Forgery) 보호를 비활성화
 		http.authorizeRequests() //접근권한 설정
 				.antMatchers("/auth/**") //모든 사용자(로그인 없이도) "/auth/" url접근 허용.
 				.permitAll()
 				.and()
-				.exceptionHandling() //AuthService 에서 authentication중 흐름이 끊김. 예외 처리 해줘야함.
+				.exceptionHandling() //AuthService 에서 authentication중 흐름이 끊길때의 예외 처리
 				.authenticationEntryPoint(customAuthenticationEntryPoint); //매개변수를 보면 authenticationEntryPoint를 넣어줘야함.
 	}
 }

@@ -31,10 +31,12 @@ public class AuthService {
 		UsernamePasswordAuthenticationToken token =
 				new UsernamePasswordAuthenticationToken(signinReqDto.getEmail(), signinReqDto.getPassword());
 
+		System.out.println("AuthService-Signin -- (1)");
+		System.out.println("token : " + token);
 		//return type : authentication
 		Authentication authentication = authenticationManagerBuilder.getObject().authenticate(token);
-		System.out.println("여기까지 왔음 !!!");
-		System.out.println(authentication.getName());
+		System.out.println("authentication 객체 : " + authentication);
+		System.out.println("authentication.getName() : " +authentication.getName());
 		return  null;
 	}
 }
