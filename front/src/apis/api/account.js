@@ -12,5 +12,6 @@ export const signin = async (account) => {
     const response = await instance.post("/auth/signin", account)
     console.log("login 응답")
     console.log(response)
+    localStorage.setItem("accessToken", "Bearer " + response.data);
     return response;
 }
