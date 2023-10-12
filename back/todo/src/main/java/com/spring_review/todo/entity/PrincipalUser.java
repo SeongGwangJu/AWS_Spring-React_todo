@@ -18,8 +18,9 @@ public class PrincipalUser implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
+		//GrantedAuthority를 상속받은 Type을 return 자료형으로 받음.
 		System.out.println("0 Collection ");
-		return null;
+		return user.toGrantedAuthorityList();
 	}
 
 	@Override
