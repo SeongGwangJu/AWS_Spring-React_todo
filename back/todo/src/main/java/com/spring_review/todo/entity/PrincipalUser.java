@@ -18,43 +18,43 @@ public class PrincipalUser implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		System.out.print("0 Collection");
+		System.out.println("0 Collection ");
 		return null;
 	}
 
 	@Override
 	public String getPassword() {
-		System.out.print("1 getPassword");
+		System.out.println("1 getPassword ");
 		return user.getPassword();
 	}
 
 	@Override
 	public String getUsername() {
-		System.out.print("2 getUsername");
+		System.out.println("2 getUsername ");
 		return user.getEmail();
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
-		System.out.print("3 isAccountNonExpired");
+		System.out.println("3 isAccountNonExpired ");
 		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		System.out.print("4 isAccountNonLocked");
+		System.out.println("4 isAccountNonLocked ");
 		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		System.out.print("5 isCredentialsNonExpired");
+		System.out.println("5 isCredentialsNonExpired ");
 		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		System.out.print("6 isEnabled");
+		System.out.println("6 isEnabled ");
 		return true;
 	}
 }

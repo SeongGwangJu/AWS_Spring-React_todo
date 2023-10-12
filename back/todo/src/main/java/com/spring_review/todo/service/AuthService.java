@@ -2,11 +2,18 @@ package com.spring_review.todo.service;
 
 import com.spring_review.todo.dto.SigninReqDto;
 import com.spring_review.todo.repository.UserMapper;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+
+import java.security.Key;
+import java.util.Date;
 
 @Service
 @RequiredArgsConstructor
@@ -37,6 +44,21 @@ public class AuthService {
 		Authentication authentication = authenticationManagerBuilder.getObject().authenticate(token);
 		System.out.println("authentication 객체 : " + authentication);
 		System.out.println("authentication.getName() : " +authentication.getName());
+
+		String secret = "ePC9ZkhpkDMfz+AVY2Qd/29BfQahS2ISPSwu3gpLMfE=";
+		Key key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
+
+//	ex.	Date date = new Date("2023-10-13 12:34:00");
+		Date date = new Date(new Date().getTime() + (1000 * 60 * 60 * 24)); // 1000ms(1초) * 60 * 60
+		String jwtToken = Jwts.builder()
+				.claim("username", authentication.getName())
+				.claim("auth", authentication.getAuthorities())
+				.setExpiration(date)
+				.signWith(key, SignatureAlgorithm.HS256)
+				.compact();
+
+		System.out.println("jwtToken " + jwtToken);
+
 		return  null;
 	}
 }
