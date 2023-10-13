@@ -27,6 +27,7 @@ public class TodoService {
 				.content(addtodoReqDto.getContent())
 				.email(email)
 				.build();
+		System.out.println("입력");
 		return todoMapper.saveTodo(todo) > 0;
 	}
 

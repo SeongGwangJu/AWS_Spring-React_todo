@@ -12,7 +12,6 @@
     <select id="getTodoListByEmail"
             parameterType="string"
             resultType="com.spring_review.todo.entity.Todo">
-
         select
             todo_id as todoId,
             content,
