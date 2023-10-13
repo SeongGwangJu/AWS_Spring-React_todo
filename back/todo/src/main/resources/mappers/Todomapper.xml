@@ -8,4 +8,18 @@
         insert into todo_tb
         values (0, #{content}, #{email})
     </insert>
+
+    <select id="getTodoListByEmail"
+            parameterType="string"
+            resultType="com.spring_review.todo.entity.Todo">
+
+        select
+            todo_id as todoId,
+            content,
+            email
+        from
+            todo_tb
+        where
+            email = #{email}
+    </select>
 </mapper>
