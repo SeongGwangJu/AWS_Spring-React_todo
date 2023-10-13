@@ -124,6 +124,12 @@ public class JwtAuthenticationFilter extends GenericFilter {
 
 		System.out.println("(2 : JwtFilter 끝 ======= )");
 
+		PrincipalUser principalUser = new PrincipalUser(user);
+		Authentication authentication =
+				new UsernamePasswordAuthenticationToken(principalUser, null, principalUser.getAuthorities());
+		System.out.println("In JwtFilter, authentication : " + authentication );
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		chain.doFilter(request, response);
 //		claims.get("auth");
 	}
 }

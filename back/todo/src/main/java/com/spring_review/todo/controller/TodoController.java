@@ -1,15 +1,14 @@
 package com.spring_review.todo.controller;
 
 import com.spring_review.todo.dto.AddtodoReqDto;
+import com.spring_review.todo.dto.UpdateTodoReqDto;
 import com.spring_review.todo.service.TodoService;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Security;
 
@@ -32,6 +31,16 @@ public class TodoController {
 	public ResponseEntity<?> getTodoList() {
 
 		return ResponseEntity.ok().body(todoService.getTodoList());
+	}
+
+	@DeleteMapping("/todo/{todoId}")
+	public ResponseEntity<?> deleteTodo(@PathVariable int todoId) { //경로의 변수 = todoId
+		return ResponseEntity.ok().body(todoService.deleteTodo(todoId));
+	}
+
+	@PutMapping("/todo/{todoId}")
+	public ResponseEntity<?> updateTodo(@PathVariable int todoId, @RequestBody UpdateTodoReqDto updateTodoReqDto) {
+		return ResponseEntity.ok(todoService.updateTodo(todoId, updateTodoReqDto));
 
 	}
 }

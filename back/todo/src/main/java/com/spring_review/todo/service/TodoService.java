@@ -2,6 +2,7 @@ package com.spring_review.todo.service;
 
 import com.spring_review.todo.dto.AddtodoReqDto;
 import com.spring_review.todo.dto.GetTodoListRespDto;
+import com.spring_review.todo.dto.UpdatetodoReqDto;
 import com.spring_review.todo.entity.Todo;
 import com.spring_review.todo.repository.TodoMapper;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,7 @@ public class TodoService {
 				.content(addtodoReqDto.getContent())
 				.email(email)
 				.build();
+		System.out.println("입력");
 		return todoMapper.saveTodo(todo) > 0;
 	}
 
@@ -41,5 +43,19 @@ public class TodoService {
 		});
 
 		return getTodoListRespDtos;
+	}
+
+	@Transactional(rollbackFor = Exception.class)
+	public Boolean deleteTodo(int todoId) {
+		return todoMapper.deleteTodoByTodoId(todoId) > 0;
+	}
+
+	@Transactional(rollbackFor = Exception.class)
+	public boolean updateTodo(int todoId, UpdatetodoReqDto updatetodoReqDto) {
+		Todo todo = Todo.builder()
+				.todoId(todoId)
+				.content(updatetodoReqDto.getContent())
+				.build();
+		return todoMapper.updateTodo(todo) > 0;
 	}
 }

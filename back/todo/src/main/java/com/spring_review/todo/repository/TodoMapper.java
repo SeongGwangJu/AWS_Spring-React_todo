@@ -9,5 +9,6 @@ import java.util.List;
 public interface TodoMapper {
 	public int saveTodo(Todo todo);
 	public List<Todo> getTodoListByEmail(String email);
-
+	public int deleteTodoByTodoId(int todoId);
+	public int updateTodo(Todo todo);
 }

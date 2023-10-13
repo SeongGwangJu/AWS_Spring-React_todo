@@ -12,7 +12,6 @@
     <select id="getTodoListByEmail"
             parameterType="string"
             resultType="com.spring_review.todo.entity.Todo">
-
         select
             todo_id as todoId,
             content,
@@ -22,4 +21,20 @@
         where
             email = #{email}
     </select>
+
+    <delete id="deleteTodoByTodoId" parameterType="integer">
+        delete
+        from
+            todo_tb
+        where
+            todo_id = #{todoId}
+    </delete>
+
+    <update id="updateTodo" parameterType="com.spring_review.todo.entity.Todo">
+        update todo_tb
+        set
+            content = #{content}
+        where
+            todo_id = #{todoId}
+    </update>
 </mapper>
