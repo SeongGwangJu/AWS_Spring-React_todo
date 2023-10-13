@@ -38,19 +38,18 @@ public class AuthService {
 		UsernamePasswordAuthenticationToken token =
 				new UsernamePasswordAuthenticationToken(signinReqDto.getEmail(), signinReqDto.getPassword());
 
-		System.out.println("AuthService-Signin -- (1)");
-		System.out.println("token : " + token);
+		System.out.println("==== (1) AuthService-Signin");
+		System.out.println("(1) token : " + token);
 		//return type : authentication
 		Authentication authentication = authenticationManagerBuilder.getObject().authenticate(token);
-		System.out.println("authentication 객체 : " + authentication);
-		System.out.println("authentication.getName() : " +authentication.getName());
+		System.out.println("(1) authentication 객체 : " + authentication);
+		System.out.println("(1) authentication.getName() : " +authentication.getName());
 
 		String secret = "ePC9ZkhpkDMfz+AVY2Qd/29BfQahS2ISPSwu3gpLMfE=";
 		Key key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
 
 //	ex.	Date date = new Date("2023-10-13 12:34:00");
 		Date date = new Date(new Date().getTime() + (1000 * 60 * 60 * 24)); // 1000ms(1초) * 60 * 60
-		System.out.println("jwtToken 발급 전");
 		String jwtToken = Jwts.builder()
 				.claim("username", authentication.getName())
 				.claim("auth", authentication.getAuthorities())
@@ -58,8 +57,9 @@ public class AuthService {
 				.signWith(key, SignatureAlgorithm.HS256)
 				.compact();
 
-		System.out.println("jwtToken " + jwtToken);
-		System.out.println("authentication.getAuthorities() : " + authentication.getAuthorities());
+		System.out.println("(1) jwtToken " + jwtToken);
+		System.out.println("(1) authentication.getAuthorities() : " + authentication.getAuthorities());
+		System.out.println("(1) 끝 ======");
 
 		return  jwtToken;
 	}

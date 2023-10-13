@@ -19,16 +19,16 @@ public class PrincipalDetatilsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		System.out.println("PrincipalDetailsService -- (2)");
-		System.out.println("입력한 email : " + email + " (*printed in loadUserByUsername()");
+		System.out.println("===== (3) PrincipalDetailsService 시작");
+		System.out.println("(3)입력한 email : " + email + " (*printed in loadUserByUsername()");
 
 		User user = userMapper.findUserByEmail(email);
 
 		if(user == null) {
-			System.out.println("조회된 user가 없으므로 null을 리턴함."); //id가 틀렸을 경우임.
+			System.out.println("(3) 조회된 user가 없으므로 null을 리턴함."); //id가 틀렸을 경우임.
 			return null;
 		}
-		System.out.println("user가 null은 아니니까 이건 뜨겠지.");
+		System.out.println("(3) user가 null이 아님 => principalUser를 Return.");
 		return new PrincipalUser(user);
 	}
 }

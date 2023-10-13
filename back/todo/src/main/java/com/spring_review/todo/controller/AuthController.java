@@ -44,7 +44,6 @@ public class AuthController {
 				System.out.println(fieldName); //email or name ..
 				System.out.println(message); //"이메일 형식을 지켜주세요" or "공백일 수 없습니다 등.
 			}
-
 			return ResponseEntity.badRequest().body(errorMap);
 		}
 
@@ -56,17 +55,18 @@ public class AuthController {
 		}
 
 		userService.signupUser(signupReqDto);
-		return ResponseEntity.ok().body("Success");
+		return ResponseEntity.ok().body(true);
 	}
 
 	@PostMapping("/auth/signin")
 	public ResponseEntity<?> signin(@RequestBody SigninReqDto signinReqDto) {
+		System.out.println("========= AuthController - /auth/signin =========");
 		return ResponseEntity.ok().body(authService.signin(signinReqDto));
 	}
 
-	@GetMapping("/auth/authenticated")
+	@GetMapping("/authenticated")
 	public ResponseEntity<?> authenticated() {
-
-		return ResponseEntity.ok("successd");
+		System.out.println("========= AuthController - /authenticated =========");
+		return ResponseEntity.ok(true);
 	}
 }
