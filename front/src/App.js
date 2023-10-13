@@ -12,8 +12,8 @@ function App() {
     <RootLayout>
       <Routes>
         <Route path='/' element={ <AuthRouter element={ <Home />} />} />
-        <Route path='/accounts/signup' element={<Signup />} />
-        <Route path='/accounts/login' element={<Signin />} />
+        <Route path='/auth/signup' element={ <AuthRouter element={ <Signup /> }/>} />
+        <Route path='/auth/signin' element={ <AuthRouter element={ <Signin /> }/>} />
       </Routes>
     </RootLayout>
     </>

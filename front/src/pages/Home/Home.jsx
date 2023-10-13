@@ -19,13 +19,13 @@ function Home(props) {
                 </li>
             </ul>
             <h4>
-                <Link to="/accounts/signup">
+                <Link to="/auth/signup">
                     회원가입 창으로 이동
                 </Link>
             </h4>
 
             <h4>
-                <Link to="/accounts/login">
+                <Link to="/auth/signin">
                     로그인 창으로 이동
                 </Link>
             </h4>

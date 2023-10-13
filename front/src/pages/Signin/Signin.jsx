@@ -17,7 +17,6 @@ function Signin(props) {
     const [ account, setAccount ] = useState(user);
 
     const handleInputChange = (e) => {
-        console.log([e.target.name] + " : " + e.target.value)
         setAccount({
             ...account,
             [e.target.name]: e.target.value
@@ -49,7 +48,7 @@ function Signin(props) {
             <input type="text" placeholder="email" name="email" onChange={handleInputChange} />
             <input type="password" placeholder="password" name="password" onChange={handleInputChange} />
             <button onClick={handleSigninSubmit} >로그인</button>
-            <Link to="/accounts/signup">
+            <Link to="/auth/signup">
                 회원가입
 			</Link>
         </div>

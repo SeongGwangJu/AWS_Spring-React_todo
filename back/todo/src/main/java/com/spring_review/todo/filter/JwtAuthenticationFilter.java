@@ -74,7 +74,6 @@ public class JwtAuthenticationFilter extends GenericFilter {
 					.parseClaimsJws(accessToken)
 					.getBody();
 		} catch (Exception e) { //토큰이 유효하지 않은 경우
-			chain.doFilter(request, response);
 			throw new AuthenticationException();
 		}
 

@@ -33,13 +33,13 @@ function Signup(props) {
     //         email: "aaa@gmail.com",
     //         name:"주성광"
     //     })
-    //     navigate("accounts/login");
+    //     navigate("auth/signin");
     // }
 
     const handleSignupSubmit = async () => {
         try{
             await signup(account);
-            navigate("/accounts/login");
+            navigate("/auth/signin");
 
         }catch(error) {
             console.log("signup 중 Error 발생")
@@ -75,7 +75,7 @@ function Signup(props) {
             <input type="text" placeholder="name" name="name" onChange={handleInputChange} />
             <input type="password" placeholder="password" name="password" onChange={handleInputChange} />
             <button onClick={handleSignupSubmit} >가입</button>
-            <Link to="/accounts/login">
+            <Link to="/auth/signin">
 			    로그인
 			</Link>
         </div>
