@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--repository폴더의 mapper와 연결-->
+<mapper namespace="com.spring_review.todo.repository.TodoMapper">
+    <insert id="saveTodo" parameterType="com.spring_review.todo.entity.Todo">
+        insert into todo_tb
+        values (0, #{content}, #{email})
+    </insert>
+</mapper>

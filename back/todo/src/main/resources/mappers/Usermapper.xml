@@ -80,7 +80,7 @@
         select
             count(*)
         from
-            user_tb
+            user_tb ut
         where
             ut.email = #{email}
     </select>

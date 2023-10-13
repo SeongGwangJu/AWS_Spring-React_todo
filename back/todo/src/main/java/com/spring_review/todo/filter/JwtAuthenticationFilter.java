@@ -60,13 +60,15 @@ public class JwtAuthenticationFilter extends GenericFilter {
 
 		//받아온 토큰을 파싱함.
 		System.out.println("==== \"authenticated\"일 때의 JwtFilter ====");
+
 		String accessToken = authorization.substring("Bearer ".length());
 		System.out.println("(2) accessToken : " +accessToken);
+
 		String secret = "ePC9ZkhpkDMfz+AVY2Qd/29BfQahS2ISPSwu3gpLMfE=";
 		Key key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
 
 //		Body를 얻음.
-		Claims claims;
+		Claims claims = null;
 		try {
 			claims = Jwts.parserBuilder()
 					.setSigningKey(key)
@@ -74,7 +76,8 @@ public class JwtAuthenticationFilter extends GenericFilter {
 					.parseClaimsJws(accessToken)
 					.getBody();
 		} catch (Exception e) { //토큰이 유효하지 않은 경우
-			throw new AuthenticationException();
+			chain.doFilter(request, response);
+			return;
 		}
 
 		String username = claims.get("username", String.class);
@@ -121,6 +124,6 @@ public class JwtAuthenticationFilter extends GenericFilter {
 
 		System.out.println("(2 : JwtFilter 끝 ======= )");
 
-		claims.get("auth");
+//		claims.get("auth");
 	}
 }
