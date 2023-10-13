@@ -15,6 +15,7 @@ function Signin(props) {
     }
 
     const [ account, setAccount ] = useState(user);
+    const [ errorMsg, setErrorMsg ] = useState("");
 
     const handleInputChange = (e) => {
         setAccount({
@@ -26,11 +27,15 @@ function Signin(props) {
 
     const handleSigninSubmit = async () => {
         try {
-            await signin(account);
+            const response = await signin(account);
+            console.log(response);
+            localStorage.setItem("accessToken", "Bearer " + response.data);
+            window.location.reload();
             navigate("/")
         }catch(error) {
             console.log("login중 Error 발생")
             console.log(error);
+            setErrorMsg(error.response.data.errorMessage);
         }
     }
 
@@ -51,6 +56,9 @@ function Signin(props) {
             <Link to="/auth/signup">
                 회원가입
 			</Link>
+            <div>
+                {errorMsg}
+            </div>
         </div>
     );
 }

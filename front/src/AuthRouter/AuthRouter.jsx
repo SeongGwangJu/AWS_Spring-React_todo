@@ -10,8 +10,6 @@ function AuthRouter({element}) {
     const permitAllPath = ["/auth"];
     const [ elementState, setElementState ] = useState(<></>);
 
-
-
     useEffect(() => {
         const option = {
             headers :{
