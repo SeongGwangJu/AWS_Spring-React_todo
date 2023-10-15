@@ -2,7 +2,7 @@ package com.spring_review.todo.service;
 
 import com.spring_review.todo.dto.AddtodoReqDto;
 import com.spring_review.todo.dto.GetTodoListRespDto;
-import com.spring_review.todo.dto.UpdatetodoReqDto;
+import com.spring_review.todo.dto.UpdateTodoReqDto;
 import com.spring_review.todo.entity.Todo;
 import com.spring_review.todo.repository.TodoMapper;
 import lombok.RequiredArgsConstructor;
@@ -51,10 +51,10 @@ public class TodoService {
 	}
 
 	@Transactional(rollbackFor = Exception.class)
-	public boolean updateTodo(int todoId, UpdatetodoReqDto updatetodoReqDto) {
+	public boolean updateTodo(int todoId, UpdateTodoReqDto updateTodoReqDto) {
 		Todo todo = Todo.builder()
 				.todoId(todoId)
-				.content(updatetodoReqDto.getContent())
+				.content(updateTodoReqDto.getUpdateContent())
 				.build();
 		return todoMapper.updateTodo(todo) > 0;
 	}

@@ -19,6 +19,7 @@ function Home(props) {
         }
         try {
             const response = await axios.get("http://localhost:8080/todo/list", option);
+            console.log(response);
             return response;
         }catch(error) {
             console.error(error);
@@ -36,6 +37,7 @@ function Home(props) {
             }
         }
         await axios.post("http://localhost:8080/todo", {content}, option);
+        setContent("");
         todoList.refetch(); //데이터 변화에따라 자동으로 새로고침.
     }
     console.log(todoList)
@@ -75,7 +77,7 @@ function Home(props) {
                 }
             }
             //updateContent 왜 있음?
-            await axios.update(`http://localhost:8080/todo/${todoId}`, {updateContent}, option);
+            await axios.put(`http://localhost:8080/todo/${todoId}`, {updateContent}, option);
             todoList.refetch();
         }catch(error) {
             console.error(error);
@@ -88,7 +90,7 @@ function Home(props) {
                 TODO
             </h1>
             <div>
-                <input type="text" onChange={handleContentInputChange}/>
+                <input type="text" onChange={handleContentInputChange} value={content}/>
                 <button onClick={handleAddTodo}> 추가 </button>
             </div>
             <ul>

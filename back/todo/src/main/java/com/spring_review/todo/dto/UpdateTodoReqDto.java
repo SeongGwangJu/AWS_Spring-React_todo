@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class UpdateTodoReqDto {
-	private String content;
+	private String updateContent;
 }

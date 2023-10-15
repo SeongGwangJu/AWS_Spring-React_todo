@@ -18,6 +18,7 @@ public class TodoController {
 
 	private final TodoService todoService;
 
+	//추가
 	@PostMapping("/todo")
 	public ResponseEntity<?> addTodo(@RequestBody AddtodoReqDto addtodoReqDto) {
 		System.out.println("TodoController에서 Dto :" + addtodoReqDto);
@@ -27,17 +28,20 @@ public class TodoController {
 		return ResponseEntity.ok(todoService.addTodo(addtodoReqDto));
 	}
 
+	//조회
 	@GetMapping("/todo/list")
 	public ResponseEntity<?> getTodoList() {
 
 		return ResponseEntity.ok().body(todoService.getTodoList());
 	}
 
+	//삭제
 	@DeleteMapping("/todo/{todoId}")
 	public ResponseEntity<?> deleteTodo(@PathVariable int todoId) { //경로의 변수 = todoId
 		return ResponseEntity.ok().body(todoService.deleteTodo(todoId));
 	}
 
+	//수정
 	@PutMapping("/todo/{todoId}")
 	public ResponseEntity<?> updateTodo(@PathVariable int todoId, @RequestBody UpdateTodoReqDto updateTodoReqDto) {
 		return ResponseEntity.ok(todoService.updateTodo(todoId, updateTodoReqDto));
